@@ -1,7 +1,8 @@
-import numpy as np
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
 import cv2
+import numpy as np
+
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 
 class UserEdit(object):
@@ -68,7 +69,7 @@ class PointEdit(UserEdit):
         return dx <= self.width + 1 and dy <= self.width + 1
 
     def update_painter(self, painter):
-        w = max(3, self.width)
+        w = max(3, int(self.width))
         c = self.color
         r = c.red()
         g = c.green()
@@ -81,7 +82,7 @@ class PointEdit(UserEdit):
         else:
             painter.setPen(QPen(Qt.white, 1))
         painter.setBrush(ca)
-        painter.drawRoundedRect(self.pnt.x() - w, self.pnt.y() - w, 1 + 2 * w, 1 + 2 * w, 2, 2)
+        painter.drawRoundedRect(int(self.pnt.x()) - w, int(self.pnt.y()) - w, 1 + 2 * w, 1 + 2 * w, 2, 2)
 
 
 class UIControl:

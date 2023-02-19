@@ -1,11 +1,15 @@
 import cv2
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+
 from data import lab_gamut
 import numpy as np
 
 
 class GUIGamut(QWidget):
+    update_color = pyqtSignal(np.ndarray)
+
     def __init__(self, gamut_size=110):
         QWidget.__init__(self)
         self.gamut_size = gamut_size
@@ -44,7 +48,7 @@ class GUIGamut(QWidget):
         L = self.l_in
         lab = np.array([L, a, b])
         color = lab_gamut.lab2rgb_1d(lab, clip=True, dtype='uint8')
-        self.emit(SIGNAL('update_color'), color)
+        self.update_color.emit(color)
         self.update()
 
     def paintEvent(self, event):
@@ -63,8 +67,8 @@ class GUIGamut(QWidget):
         if self.pos is not None:
             painter.setPen(QPen(Qt.black, 2, Qt.SolidLine, cap=Qt.RoundCap, join=Qt.RoundJoin))
             w = 5
-            x = self.pos.x()
-            y = self.pos.y()
+            x = int(self.pos.x())
+            y = int(self.pos.y())
             painter.drawLine(x - w, y, x + w, y)
             painter.drawLine(x, y - w, x, y + w)
         painter.end()

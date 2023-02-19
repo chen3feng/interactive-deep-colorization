@@ -1,8 +1,11 @@
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 
 
 class GUI_VIS(QWidget):
+    update_color = pyqtSignal()
+
     def __init__(self, win_size=256, scale=2.0):
         QWidget.__init__(self)
         self.result = None
