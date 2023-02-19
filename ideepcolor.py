@@ -3,7 +3,6 @@ import sys
 import argparse
 import qdarkstyle
 
-from PyQt5.QtWidgets import *
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
